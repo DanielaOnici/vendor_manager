@@ -1,0 +1,41 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.input-validation-error {
+    border: 2px solid #dc3545; /* same red as text-danger */
+    background-color: #faebd7; /* antique white */
+}
+
+ 
+.validation-summary-valid {
+    display: none;
+}
+
+ 
+.validation-summary-errors ul {
+    list-style: none;
+}
+
+.highlight {
+    background-color: lightskyblue;
+}
+
+.active {
+    background-color: lightskyblue;
+}

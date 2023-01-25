@@ -1,0 +1,37 @@
+﻿@model Vendor
+
+@{
+    ViewData["Title"] = "Edit a Vendor";
+}
+
+@section scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
+
+<div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
+<form asp-controller="Vendor" asp-action="ProcessEditRequest" asp-route-id="@Model.VendorId" asp-route-lowerbound="a" asp-route-upperbound="e" method="post" enctype="application/x-www-form-urlencoded">
+   
+    <partial name="_VendorDetails" />
+
+    <input type="hidden" asp-for="@Model.VendorId" />
+
+    <button type="submit" class="btn btn-primary">Edit</button>
+    @if (Model.Name.ToUpper().StartsWith("A") || Model.Name.ToUpper().StartsWith("B") || Model.Name.ToUpper().StartsWith("C") || Model.Name.ToUpper().StartsWith("D") || Model.Name.ToUpper().StartsWith("E"))
+    {
+        <a asp-controller="Vendor" asp-action="GetVendorsByGroup" asp-route-lowerbound="a" asp-route-upperbound="e" class="btn btn-primary mt-1">Cancel</a>
+    }
+    else if (Model.Name.ToUpper().StartsWith("F") || Model.Name.ToUpper().StartsWith("G") || Model.Name.ToUpper().StartsWith("H") || Model.Name.ToUpper().StartsWith("I") || Model.Name.ToUpper().StartsWith("J") || Model.Name.ToUpper().StartsWith("K"))
+    {
+        <a asp-controller="Vendor" asp-action="GetVendorsByGroup" asp-route-lowerbound="f" asp-route-upperbound="k" class="btn btn-primary mt-1">Cancel</a>
+    }
+    else if (Model.Name.ToUpper().StartsWith("L") || Model.Name.ToUpper().StartsWith("M") || Model.Name.ToUpper().StartsWith("N") || Model.Name.ToUpper().StartsWith("O") || Model.Name.ToUpper().StartsWith("P") || Model.Name.ToUpper().StartsWith("Q") || Model.Name.ToUpper().StartsWith("R"))
+    {
+        <a asp-controller="Vendor" asp-action="GetVendorsByGroup" asp-route-lowerbound="l" asp-route-upperbound="r" class="btn btn-primary mt-1">Cancel</a>
+    }
+    else
+    {
+        <a asp-controller="Vendor" asp-action="GetVendorsByGroup" asp-route-lowerbound="s" asp-route-upperbound="z" class="btn btn-primary mt-1">Cancel</a>
+    }
+</form>

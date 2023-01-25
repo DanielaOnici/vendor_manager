@@ -1,0 +1,109 @@
+﻿@model List<Vendor>
+
+@{
+    ViewData["Title"] = "All Vendors";
+}
+
+<a asp-controller="Vendor" asp-action="GetAddVendorRequest" asp-route-lowerbound="a" asp-route-upperbound="e">Add new vendor</a>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var vendor in Model)
+        {
+            <tr>
+                <td>@vendor.Name</td>
+                <td>@vendor.Address1</td>
+                @if (vendor.Name.ToUpper().StartsWith("A") || vendor.Name.ToUpper().StartsWith("B") || vendor.Name.ToUpper().StartsWith("C") || vendor.Name.ToUpper().StartsWith("D") || vendor.Name.ToUpper().StartsWith("E"))
+                {
+                    <td>
+                        <a asp-controller="Vendor" asp-action="GetInvoicesByVendorId" 
+                        asp-route-id="@vendor.VendorId"
+                        asp-route-lowerbound="a" asp-route-upperbound="e">Invoices</a>
+
+                        <span class="mx-1">|</span>
+
+                        <a asp-controller="Vendor" asp-action="GetEditRequestById" 
+                        asp-route-id="@vendor.VendorId"
+                        asp-route-lowerbound="a" asp-route-upperbound="e">Edit</a>
+
+                        <span class="mx-1">|</span>
+
+                        <a asp-controller="Vendor" asp-action="ProcessDeleteRequestById" 
+                        asp-route-id="@vendor.VendorId"
+                        asp-route-lowerbound="a" asp-route-upperbound="e">Delete</a>
+                    </td>
+                }
+                else if (vendor.Name.ToUpper().StartsWith("F") || vendor.Name.ToUpper().StartsWith("G") || vendor.Name.ToUpper().StartsWith("H") || vendor.Name.ToUpper().StartsWith("I") || vendor.Name.ToUpper().StartsWith("J") || vendor.Name.ToUpper().StartsWith("K"))
+                {
+                    <td>
+                        <a asp-controller="Vendor" asp-action="GetInvoicesByVendorId"
+                        asp-route-id="@vendor.VendorId"
+                        asp-route-lowerbound="f" asp-route-upperbound="k">Invoices</a>
+
+                        <span class="mx-1">|</span>
+
+                        <a asp-controller="Vendor" asp-action="GetEditRequestById"
+                        asp-route-id="@vendor.VendorId"
+                        asp-route-lowerbound="f" asp-route-upperbound="k">Edit</a>
+
+                        <span class="mx-1">|</span>
+
+                        <a asp-controller="Vendor" asp-action="ProcessDeleteRequestById"
+                        asp-route-id="@vendor.VendorId"
+                        asp-route-lowerbound="f" asp-route-upperbound="k">Delete</a>
+                    </td>
+                }
+                else if (vendor.Name.ToUpper().StartsWith("L") || vendor.Name.ToUpper().StartsWith("M") || vendor.Name.ToUpper().StartsWith("N") || vendor.Name.ToUpper().StartsWith("O") || vendor.Name.ToUpper().StartsWith("P") || vendor.Name.ToUpper().StartsWith("Q") || vendor.Name.ToUpper().StartsWith("R"))
+                {
+                     <td>
+                        <a asp-controller="Vendor" asp-action="GetInvoicesByVendorId"
+                        asp-route-id="@vendor.VendorId"
+                        asp-route-lowerbound="l" asp-route-upperbound="r">Invoices</a>
+
+                        <span class="mx-1">|</span>
+
+                        <a asp-controller="Vendor" asp-action="GetEditRequestById"
+                        asp-route-id="@vendor.VendorId"
+                        asp-route-lowerbound="l" asp-route-upperbound="r">Edit</a>
+
+                        <span class="mx-1">|</span>
+
+                        <a asp-controller="Vendor" asp-action="ProcessDeleteRequestById"
+                        asp-route-id="@vendor.VendorId"
+                        asp-route-lowerbound="l" asp-route-upperbound="r">Delete</a>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <a asp-controller="Vendor" asp-action="GetInvoicesByVendorId"
+                        asp-route-id="@vendor.VendorId"
+                        asp-route-lowerbound="s" asp-route-upperbound="z">Invoices</a>
+
+                        <span class="mx-1">|</span>
+
+                        <a asp-controller="Vendor" asp-action="GetEditRequestById"
+                        asp-route-id="@vendor.VendorId"
+                        asp-route-lowerbound="s" asp-route-upperbound="z">Edit</a>
+
+                        <span class="mx-1">|</span>
+
+                        <a asp-controller="Vendor" asp-action="ProcessDeleteRequestById"
+                        asp-route-id="@vendor.VendorId"
+                        asp-route-lowerbound="s" asp-route-upperbound="z">Delete</a>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<partial name="_NavGroups" />
+

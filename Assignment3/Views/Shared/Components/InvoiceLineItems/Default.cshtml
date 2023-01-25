@@ -1,0 +1,77 @@
+﻿@model InvoiceLineItemsViewModel
+
+
+@if (@Model.ActiveInvoice.Vendor.Name.ToUpper().StartsWith("A") || @Model.ActiveInvoice.Vendor.Name.ToUpper().StartsWith("B") || @Model.ActiveInvoice.Vendor.Name.ToUpper().StartsWith("C") || @Model.ActiveInvoice.Vendor.Name.ToUpper().StartsWith("D") || @Model.ActiveInvoice.Vendor.Name.ToUpper().StartsWith("E"))
+{
+    <h4><a asp-controller="Vendor" asp-action="GetVendorsByGroup" asp-route-lowerbound="a" asp-route-upperbound="e">Return to A-E Vendors</a></h4>
+}
+else if (@Model.ActiveInvoice.Vendor.Name.ToUpper().StartsWith("F") || @Model.ActiveInvoice.Vendor.Name.ToUpper().StartsWith("G") || @Model.ActiveInvoice.Vendor.Name.ToUpper().StartsWith("H") || @Model.ActiveInvoice.Vendor.Name.ToUpper().StartsWith("I") || @Model.ActiveInvoice.Vendor.Name.ToUpper().StartsWith("J") || @Model.ActiveInvoice.Vendor.Name.ToUpper().StartsWith("K"))
+{
+    <h4><a asp-controller="Vendor" asp-action="GetVendorsByGroup" asp-route-lowerbound="f" asp-route-upperbound="k">Return to F-K Vendors</a></h4>
+}
+else if (@Model.ActiveInvoice.Vendor.Name.ToUpper().StartsWith("L") || @Model.ActiveInvoice.Vendor.Name.ToUpper().StartsWith("M") || @Model.ActiveInvoice.Vendor.Name.ToUpper().StartsWith("N") || @Model.ActiveInvoice.Vendor.Name.ToUpper().StartsWith("O") || @Model.ActiveInvoice.Vendor.Name.ToUpper().StartsWith("P") || @Model.ActiveInvoice.Vendor.Name.ToUpper().StartsWith("Q") || @Model.ActiveInvoice.Vendor.Name.ToUpper().StartsWith("R"))
+{
+    <h4><a asp-controller="Vendor" asp-action="GetVendorsByGroup" asp-route-lowerbound="l" asp-route-upperbound="r">Return to L-R Vendors</a></h4>
+}
+else
+{
+    <h4><a asp-controller="Vendor" asp-action="GetVendorsByGroup" asp-route-lowerbound="s" asp-route-upperbound="z">Return to S-Z Vendors</a></h4>
+}
+
+
+@if (@Model.ActiveInvoice.PaymentTermsId == 1)
+{
+    <h5 class="pt-3">Terms: 10 Days</h5>
+}else if(@Model.ActiveInvoice.PaymentTermsId == 2)
+{
+    <h5 class="pt-3">Terms: 20 Days</h5>
+}
+else if (@Model.ActiveInvoice.PaymentTermsId == 3)
+{
+    <h5 class="pt-3">Terms: 30 Days</h5>
+}
+else if(@Model.ActiveInvoice.PaymentTermsId == 4)
+{
+    <h5 class="pt-3">Terms: 60 Days</h5>
+}
+else
+{
+    <h5 class="pt-3">Terms: 90 Days</h5>
+}
+
+
+<h6 class="pt-5">Line items for invoice #@Model.ActiveInvoice.InvoiceId</h6>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Description</th>
+            <th>Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var line in Model.InvoiceLineItemsList)
+        {
+                <tr>
+                    <td>@line.Description</td>
+                    <td>@line.Amount</td>
+                </tr>
+        }
+        </tbody>
+</table>
+<h6>Total: @Model.ActiveInvoice.Total</h6>
+<div>
+    <form asp-controller="Vendor" asp-action="AddLineItemToInvoiceById" asp-route-id="@Model.ActiveInvoice.Vendor.VendorId"  asp-route-lowerbound="a" asp-route-upperbound="e" asp-route-invoiceId="@Model.ActiveInvoice.InvoiceId" method="post" enctype="application/x-www-form-urlencoded">
+
+        <div class="form-group col-6">
+            <label asp-for="@Model.NewLineItem.Description">Description:</label>
+            <input type="text" asp-for="@Model.NewLineItem.Description" class="form-control" value="@Model.NewLineItem.Description" />
+        </div>
+
+        <div class="form-group col-6">
+            <label asp-for="@Model.NewLineItem.Amount">Amount:</label>
+            <input type="text" asp-for="@Model.NewLineItem.Amount" class="form-control" value="@Model.NewLineItem.Amount" />
+        </div>
+        <input type="hidden" asp-for="@Model.NewLineItem.InvoiceId " />
+        <button type="submit" class="btn btn-primary mt-2">Add Line Item</button>
+    </form>
+</div>
